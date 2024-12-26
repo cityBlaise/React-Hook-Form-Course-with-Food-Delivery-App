@@ -1,5 +1,5 @@
-import "./App.css"
-import { FoodDeliveryForm } from "./FoodDeliveryForm"
+import "./App.css";
+import { FoodDeliveryForm } from "./FoodDeliveryForm";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
