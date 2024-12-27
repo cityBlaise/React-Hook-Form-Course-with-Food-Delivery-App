@@ -9,12 +9,12 @@ const TextField = forwardRef(
   (props: TextFieldProps, ref: ForwardedRef<HTMLInputElement>) => {
     const { type = "text", className = "", label, error, ...rest } = props;
     return (
-      <div className="form-floating">
+      <div className="form-floating mb-3">
         <input
+          {...rest}
           ref={ref}
           type={type}
           className={`form-control ${className}`}
-          {...rest}
         />
         <label>{label}</label>
         {error && <div>{error.message}</div>}

@@ -1,47 +1,41 @@
-import { FieldErrors, useForm } from "react-hook-form";
-import getRenderCount from "./utils/getRenderCount";
+import {
+  FieldErrors,
+  FormProvider,
+  useForm,
+  UseFormReturn,
+} from "react-hook-form";
 import TextField from "./controls/TextField";
-import SelectField from "./controls/SelectField";
-import { SelectOptionType } from "./types";
+import getRenderCount from "./utils/getRenderCount";
+import CheckoutForm from "./CheckoutFrom";
+import { FoodDeliveryFormType } from "./types";
 
-type FoodDeliveryFormType = {
-  customerName: string;
-  orderNumber: number;
-  email: string;
-  mobile: string;
-  paymentMethod: string;
-  deliveryIn: number;
-};
 
-const paymentOptions: SelectOptionType<string>[] = [
-  { value: "", text: "Select" },
-  { value: "online", text: "Pay Online" },
-  { value: "COD", text: "Cash on Delivery" },
-];
-const deliveryInOptions: SelectOptionType<number>[] = [
-  { value: 0, text: "Select" },
-  { value: 30, text: "Half an Hour" },
-  { value: 60, text: "1 Hour" },
-  { value: 120, text: "2 Hour" },
-  { value: 180, text: "3 Hour" },
-];
 const RenderCount = getRenderCount();
 export const FoodDeliveryForm = () => {
+  const methods: UseFormReturn<FoodDeliveryFormType> =
+    useForm<FoodDeliveryFormType>({
+      mode: "onChange",
+      defaultValues: {
+        customerName: "",
+        mobile: "",
+        email: "",
+        orderNumber: new Date().valueOf(),
+        paymentMethod: "",
+        deliveryIn: 0,
+        // address: {
+        //   streetAddress: "",
+        //   landmark: "",
+        //   city: "",
+        //   state: "",
+        // },
+      },
+    });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FoodDeliveryFormType>({
-    mode: "onChange",
-    defaultValues: {
-      customerName: "",
-      mobile: "",
-      email: "",
-      orderNumber: new Date().valueOf(),
-      paymentMethod: "",
-      deliveryIn: 0,
-    },
-  });
+  } = methods;
 
   const onSubmit = (data: FoodDeliveryFormType) => {
     console.log(data);
@@ -102,32 +96,50 @@ export const FoodDeliveryForm = () => {
           />
         </div>
       </div>
-      <div>list of ordered fodd items</div>
-      <div className="row mb-2">
+      <FormProvider {...methods}>
+        <CheckoutForm />
+      </FormProvider>
+      <div className="text-start mt-4">Delivery addres</div>
+      <div className="row my-2">
         <div className="col">
-          <SelectField
-            options={paymentOptions}
-            defaultValue={""}
-            label="Payment Method"
-            {...register("paymentMethod", {
+          <TextField
+            label="Street Address"
+            {...register("address.streetAddress", {
               required: "This field is required",
             })}
-            error={errors.paymentMethod}
+            error={errors.address?.streetAddress}
           />
         </div>
         <div className="col">
-          <SelectField<number>
-            options={deliveryInOptions}
-            defaultValue={""}
-            label="Payment Method"
-            {...register("deliveryIn", {
+          <TextField
+            label="City"
+            {...register("address.city", {
               required: "This field is required",
             })}
-            error={errors.deliveryIn}
+            error={errors.address?.city}
           />
         </div>
       </div>
-      <div>delivery addres</div>
+      <div className="row mb-2">
+        <div className="col">
+          <TextField
+            label="Landmark"
+            {...register("address.landmark", {
+              required: "This field is required",
+            })}
+            error={errors.address?.landmark}
+          />
+        </div>
+        <div className="col">
+          <TextField
+            label="State"
+            {...register("address.state", {
+              required: "This field is required",
+            })}
+            error={errors.address?.state}
+          />
+        </div>
+      </div>
       <button type="submit" className="btn btn-primary ">
         Submit
       </button>
