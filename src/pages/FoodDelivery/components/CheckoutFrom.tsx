@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
-import SelectField from "./controls/SelectField";
-import { CheckoutFormType, SelectOptionType } from "./types";
+import SelectField from "../../../controls/SelectField";
+import { SelectOptionType, CheckoutFormType } from "../../../types";
 
 const paymentOptions: SelectOptionType<string>[] = [
   { value: "", text: "Select" },
@@ -20,9 +20,9 @@ const CheckoutForm = () => {
     formState: { errors },
   } = useFormContext<CheckoutFormType>();
   return (
-    <>
-      <div className="text-start fw-bold mt-4 mb-2">Checkout Details</div>
-      <div className="row my-2">
+    <div>
+      <div className="text-start fw-bold mb-2">Checkout Details</div>
+      <div className="row">
         <div className="col">
           <SelectField
             options={paymentOptions}
@@ -46,7 +46,7 @@ const CheckoutForm = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

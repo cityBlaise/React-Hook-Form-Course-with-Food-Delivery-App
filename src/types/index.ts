@@ -3,20 +3,25 @@ export type SelectOptionType<T> = {
   text: string;
 };
 
-export type FoodDeliveryFormType = {
-  customerName: string;
-  orderNumber: number;
-  email: string;
-  mobile: string;
+export type FoodDeliveryFormType = FoodDeliveryMasteType &
+  CheckoutFormType &
+  DeliveryFormType;
+
+export type CheckoutFormType = {
+  paymentMethod: string;
+  deliveryIn: number;
+};
+export type DeliveryFormType = {
   address: {
     streetAddress: string;
     landmark: string;
     city: string;
     state: string;
   };
-} & CheckoutFormType;
-
-export type CheckoutFormType = {
-  paymentMethod: string;
-  deliveryIn: number;
+};
+export type FoodDeliveryMasteType = {
+  customerName: string;
+  orderNumber: number;
+  email: string;
+  mobile: string;
 };
