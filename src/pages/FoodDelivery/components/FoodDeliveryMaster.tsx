@@ -1,14 +1,17 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useFormState } from "react-hook-form";
 import TextField from "../../../controls/TextField";
 import { FoodDeliveryMasteType } from "../../../types";
+import getRenderCount from "../../../utils/getRenderCount";
+const RenderCount = getRenderCount();
 
 const FormDeliveryMaster = () => {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<FoodDeliveryMasteType>();
+  const { register } = useFormContext<FoodDeliveryMasteType>();
+  const { errors } = useFormState<FoodDeliveryMasteType>({
+    name: ["orderNumber", "mobile", "customerName", "email"],
+  });
   return (
     <div>
+      <RenderCount />
       <div className="row mb-3">
         <div className="col">
           <TextField

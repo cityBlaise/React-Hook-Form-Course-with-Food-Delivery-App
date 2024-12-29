@@ -31,7 +31,9 @@ export const FoodDeliveryForm = () => {
       },
     });
 
-  const { handleSubmit } = methods;
+  const {
+    handleSubmit,
+  } = methods;
 
   const onSubmit = (data: FoodDeliveryFormType) => {
     console.log(data);
