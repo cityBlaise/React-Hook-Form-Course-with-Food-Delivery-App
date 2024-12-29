@@ -9,6 +9,7 @@ import getRenderCount from "../../utils/getRenderCount";
 import CheckoutForm from "./components/CheckoutFrom";
 import DeliveryAddressForm from "./components/DeliveryAddressForm";
 import FormDeliveryMaster from "./components/FoodDeliveryMaster";
+import SubmitButton from "../../controls/SubmitButton";
 
 const RenderCount = getRenderCount();
 export const FoodDeliveryForm = () => {
@@ -31,9 +32,7 @@ export const FoodDeliveryForm = () => {
       },
     });
 
-  const {
-    handleSubmit,
-  } = methods;
+  const { handleSubmit, control } = methods;
 
   const onSubmit = (data: FoodDeliveryFormType) => {
     console.log(data);
@@ -56,10 +55,7 @@ export const FoodDeliveryForm = () => {
           <DeliveryAddressForm />
         </div>
       </FormProvider>
-
-      <button type="submit" className="btn btn-primary ">
-        Submit
-      </button>
+      <SubmitButton value={"Submit"} control={control} />
     </form>
   );
 };

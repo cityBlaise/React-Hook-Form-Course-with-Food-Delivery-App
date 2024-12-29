@@ -24,7 +24,7 @@ const CheckoutForm = () => {
   });
   return (
     <div>
-      <RenderCount />
+      <RenderCount /> 
       <div className="text-start fw-bold mb-2">Checkout Details</div>
       <div className="row">
         <div className="col">
@@ -40,6 +40,7 @@ const CheckoutForm = () => {
         </div>
         <div className="col">
           <SelectField<number | string>
+            defaultValue={""}
             options={deliveryInOptions}
             label="Delivery with"
             {...register("deliveryIn", {
