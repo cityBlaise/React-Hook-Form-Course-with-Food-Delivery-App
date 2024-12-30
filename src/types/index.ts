@@ -3,9 +3,11 @@ export type SelectOptionType<T> = {
   text: string;
 };
 
-export type FoodDeliveryFormType = FoodDeliveryMasteType &
+export type FoodDeliveryFormType = MasterFoodDeliveryFormType &
   CheckoutFormType &
-  DeliveryFormType;
+  DeliveryFormType & {
+    foodItems: OrderedFoodItemType[];
+  };
 
 export type CheckoutFormType = {
   paymentMethod: string;
@@ -19,9 +21,10 @@ export type DeliveryFormType = {
     state: string;
   };
 };
-export type FoodDeliveryMasteType = {
+export type MasterFoodDeliveryFormType = {
   customerName: string;
   orderNumber: number;
   email: string;
   mobile: string;
 };
+export type OrderedFoodItemType = { name: string; quantity: number };

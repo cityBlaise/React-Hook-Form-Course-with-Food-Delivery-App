@@ -8,7 +8,8 @@ import { FoodDeliveryFormType } from "../../types";
 import getRenderCount from "../../utils/getRenderCount";
 import CheckoutForm from "./components/CheckoutFrom";
 import DeliveryAddressForm from "./components/DeliveryAddressForm";
-import FormDeliveryMaster from "./components/FoodDeliveryMaster";
+import FormDeliveryMaster from "./components/MasterFoodDeliveryForm";
+import OrderedFoodItem from "./components/OrderedFoodItem";
 import SubmitButton from "../../controls/SubmitButton";
 
 const RenderCount = getRenderCount();
@@ -20,6 +21,7 @@ export const FoodDeliveryForm = () => {
         customerName: "",
         mobile: "",
         email: "",
+        foodItems: [{ name: "", quantity: 0 }],
         orderNumber: new Date().valueOf(),
         paymentMethod: "",
         deliveryIn: 0,
@@ -51,6 +53,7 @@ export const FoodDeliveryForm = () => {
       <FormProvider {...methods}>
         <div className="row row-gap-4 my-4">
           <FormDeliveryMaster />
+          <OrderedFoodItem />
           <CheckoutForm />
           <DeliveryAddressForm />
         </div>
